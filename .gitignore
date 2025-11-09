@@ -1,0 +1,16 @@
+# Entorno virtual
+venv/
+
+# Archivos de Python
+__pycache__/
+*.pyc
+
+# Archivos temporales
+*.log
+*.sqlite3
+
+# Archivos de configuración locales
+.env
+
+# Archivos estáticos generados
+staticfiles/

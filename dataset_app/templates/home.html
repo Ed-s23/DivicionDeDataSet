@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <title>Procesar Dataset</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Subir y Procesar Dataset</h1>
+
+       
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="dataset" accept=".arff" required>
+            <button type="submit">Procesar</button>
+        </form>
+
+        {% if resultado %}
+            <div class="resultado">
+                <h2>Resultado:</h2>
+                <pre>{{ resultado|safe }}</pre>
+            {% if resultado.grafica %}
+                </div class="graph-container">
+                    <img src="{% static resultado.grafica %}" alt="Gráfica de protocolo" >
+                        
+                </div> 
+            {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
