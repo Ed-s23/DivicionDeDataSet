@@ -26,14 +26,14 @@ def main(file_path=None):
             tmp.writelines(cleaned_lines)
             temp_path = tmp.name
 
-        # --- Cargar dataset ---
+        #  Cargar dataset 
         with open(temp_path, "r") as file:
             dataset = arff.load(file)
         attributes = [attr[0] for attr in dataset["attributes"]]
         df = pd.DataFrame(dataset["data"], columns=attributes)
 
         if df.empty:
-            return {"mensaje": "⚠️ El archivo está vacío después de la limpieza."}
+            return {"mensaje": " El archivo está vacío después de la limpieza."}
 
         # --- División del dataset ---
         def train_val_test_split(df, stratify=None):
@@ -46,11 +46,11 @@ def main(file_path=None):
             return train_set, val_set, test_set
 
         train_set, val_set, test_set = train_val_test_split(df, stratify="protocol_type" if "protocol_type" in df.columns else None)
-
+        df_info= df.info()
         # --- Crear carpeta para guardar gráficos ---
         graph_dir = "dataset_app/static/graphs"
         os.makedirs(graph_dir, exist_ok=True)
-
+        
         # --- Generar la gráfica como en el notebook ---
         if "protocol_type" in df.columns:
             plt.figure(figsize=(8, 5))
@@ -75,7 +75,8 @@ def main(file_path=None):
             "train_set": len(train_set),
             "validation_set": len(val_set),
             "test_set": len(test_set),
-            "grafica": graph_rel_path
+            "grafica": graph_rel_path,
+            "defInfo" : df_info
         }
 
     except Exception as e:
