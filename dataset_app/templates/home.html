@@ -12,21 +12,19 @@
     <div class="container">
         <h1>sube tu archivo DataSet</h1>
 
-       
-
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="file" name="dataset" accept=".arff" required>
-            <button type="submit">Procesar</button>
+            <button type="submit">Acepatar</button>
         </form>
 
         {% if resultado %}
             <div class="resultado">
-                <h2>Resultado:</h2>
+                <h2>Resultado:)</h2>
                 <pre>{{ resultado|safe }}</pre>
             {% if resultado.grafica %}
                 </div class="graph-container">
-                    <img src="{% static resultado.grafica %}" alt="Gráfica de protocolo" >
+                    <img src="{% static resultado.grafica %}" alt="Gráfica con los protocolos" >
                         
                 </div> 
             {% endif %}
